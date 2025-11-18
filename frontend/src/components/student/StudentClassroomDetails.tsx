@@ -38,7 +38,7 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
 
   if (!classroom || loading) {
     return (
-      <div className="p-6 text-center text-white opacity-70">
+      <div className="p-4 text-center text-white opacity-70">
         Loading classroom...
       </div>
     );
@@ -51,7 +51,7 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-card rounded-2xl p-6 border border-[var(--edu-border)] shadow-xl"
+        className="glass-card rounded-2xl p-4 border border-[var(--edu-border)] shadow-xl"
       >
         <h1 className="text-3xl font-semibold text-white mb-2">
           {classroom.name}
@@ -66,7 +66,7 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
 
           <p>
             <span className="text-white font-medium">Code:</span>{" "}
-            <span className="text-edu-blue font-mono">{classroom.code}</span>
+            <span >{classroom.code}</span>
           </p>
 
           <p className="flex items-center gap-2">
@@ -120,17 +120,22 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
         {/* -------- Overview Tab -------- */}
         {tab === "overview" && (
           <div className="space-y-8">
-            <div className="glass-card p-6 rounded-xl border border-white/10">
+            <div className="glass-card p-4 rounded-xl border border-white/10">
               <h2 className="text-xl font-semibold text-white mb-3">
                 Class Overview
               </h2>
               <p className="text-[oklch(0.68_0_0)]">
                 {classroom.description || "No description added."}
               </p>
+              {/* Teacher Info */}
+            <div className="mt-4 text-[oklch(0.68_0_0)]">
+                <span className="text-white font-medium">Teacher:</span>{" "}
+                {classroom.classTeacher?.name}
+            </div>
             </div>
 
             {/* Recent Assignments */}
-            <div className="glass-card p-6 rounded-xl border border-white/10">
+            <div className="glass-card p-4 rounded-xl border border-white/10">
               <h3 className="text-xl text-white font-medium mb-3">
                 Recent Assignments
               </h3>
@@ -139,7 +144,12 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
                 <p className="text-gray-500">No assignments yet.</p>
               ) : (
                 <div className="space-y-4 mt-3">
-                  {assignments.slice(0, 3).map((a) => (
+                  {assignments.sort((a, b) => 
+                    new Date(b.deadline).getTime() - new Date(a.deadline).getTime()
+                    )
+                    .slice(0, 3)
+                    .map((a) => (
+
                     <div
                       key={a.id}
                       className="p-5 rounded-lg bg-white/5 border border-white/10 hover:border-edu-blue transition"
@@ -159,7 +169,7 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
 
         {/* -------- Assignments Tab -------- */}
         {tab === "assignments" && (
-          <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
+          <div className="glass-card p-4 rounded-xl border border-white/10 space-y-4">
             <h2 className="text-xl text-white font-semibold mb-3">Assignments</h2>
 
             {assignments.length === 0 ? (
@@ -183,7 +193,7 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
 
         {/* -------- Students Tab -------- */}
         {tab === "students" && (
-          <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
+          <div className="glass-card p-4 rounded-xl border border-white/10 space-y-4">
             <h2 className="text-xl text-white font-semibold mb-3">
               Students
             </h2>
@@ -197,7 +207,7 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
               Classmates
             </h3>
 
-            {classroom.students?.length === 0 ? (
+            {!classroom.students ||classroom.students?.length === 0 ? (
               <p className="text-gray-500">No students joined yet</p>
             ) : (
               <ul className="space-y-3">

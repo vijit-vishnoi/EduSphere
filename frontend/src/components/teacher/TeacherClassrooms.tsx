@@ -16,12 +16,19 @@ export default function TeacherClassrooms({
 }) {
 
 
-const [stats] = useState([
-  { label: 'Total Classrooms', value: 3, icon: BookOpen },
-  { label: 'Total Students', value: 124, icon: Users },
-  { label: 'Assignments Created', value: 18, icon: FileText },
-  { label: 'Pending Submissions', value: 23, icon: Clock }
-]);
+const [stats, setStats] = useState({
+  totalClassrooms: 0,
+  totalStudents: 0,
+  assignmentsCreated: 0,
+  pendingSubmissions: 0
+});
+const statList = [
+  { label: 'Total Classrooms', value: stats.totalClassrooms, icon: BookOpen },
+  { label: 'Total Students', value: stats.totalStudents, icon: Users },
+  { label: 'Assignments Created', value: stats.assignmentsCreated, icon: FileText },
+  { label: 'Pending Submissions', value: stats.pendingSubmissions, icon: Clock }
+];
+
 const [loading, setLoading] = useState(false);
 const [classrooms, setClassrooms] = useState<any[]>([]);
 
@@ -82,9 +89,15 @@ const EmptyState = () => (
         setLoading(true);
 
         const res = await getMyClassrooms();
-        console.log("Fetched classrooms:", res.data);
+        const list = res.data.classrooms || [];
 
-        setClassrooms(res.data.classrooms || res.data || []);
+      setClassrooms(list);
+      setStats({
+        totalClassrooms: list.length,
+        totalStudents: list.reduce((sum: number, cls: any) => sum + (cls.studentCount || 0), 0),
+        assignmentsCreated: list.reduce((sum: number, cls: any) => sum + (cls.assignmentsCount || 0), 0),
+        pendingSubmissions: 0 // placeholder until assignments API added
+      });
       } catch (err) {
         console.error("Error fetching classrooms:", err);
       } finally {
@@ -116,7 +129,7 @@ const EmptyState = () => (
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
+          {statList.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
