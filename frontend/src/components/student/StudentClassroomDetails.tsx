@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { getClassroomById, getAssignmentsByClassroom } from "../../api";
-import { Users } from "lucide-react";
+
+import {
+  Users,
+  User,
+  NotebookText,
+  ClipboardList,
+  ChevronRight,
+} from "lucide-react";
 
 interface Props {
   classroomId: string;
@@ -45,132 +52,144 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
   }
 
   return (
-    <div className="p-6 h-full overflow-y-auto space-y-6">
+    <div className="p-6 h-full overflow-y-auto space-y-8">
 
-      {/* ---------- CLASS HEADER CARD ---------- */}
+      {/* ---------- CLASS HEADER ---------- */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-card rounded-2xl p-4 border border-[var(--edu-border)] shadow-xl"
+        className="glass-card rounded-2xl p-6 border border-[var(--edu-border)] shadow-xl space-y-3"
       >
-        <h1 className="text-3xl font-semibold text-white mb-2">
-          {classroom.name}
-        </h1>
+        <h1 className="text-3xl font-bold text-white">{classroom.name}</h1>
 
-        <div className="flex flex-wrap items-center gap-6 text-[oklch(0.68_0_0)]">
+        <div className="flex flex-wrap gap-6 text-gray-300 text-lg">
 
-          <p>
-            <span className="text-white font-medium">Teacher:</span>{" "}
+          <div className="flex items-center gap-2">
+            <User className="w-5 h-5 text-edu-blue" />
+            <span className="text-white">Teacher:</span>
             {classroom.classTeacher?.name}
-          </p>
+          </div>
 
-          <p>
-            <span className="text-white font-medium">Code:</span>{" "}
-            <span >{classroom.code}</span>
-          </p>
+          <div className="flex items-center gap-2">
+            <ClipboardList className="w-5 h-5 text-edu-green" />
+            <span className="text-white">Code:</span>
+            {classroom.code}
+          </div>
 
-          <p className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-edu-green" />
-            {classroom.students?.length || 0} Students
-          </p>
+          <div className="flex items-center gap-2">
+            <Users className="w-5 h-5 text-edu-purple" />
+            <span className="text-white">Students:</span>
+            {classroom.students?.length || 0}
+          </div>
 
         </div>
       </motion.div>
 
-      {/* ---------- TABS ---------- */}
-      <div className="flex items-center tab-fix border-b border-white/10 pb-3 mt-4 pl-1">
+      {/* ---------- TABS (FIXED SPACING) ---------- */}
+      <div className="flex items-center border-b border-white/10 pb-3 gap-10 pl-1 tab-fix">
 
-  {[
-    { key: "overview", label: "Overview" },
-    { key: "assignments", label: "Assignments" },
-    { key: "students", label: "Students" }
-  ].map((t) => (
-    <button
-  type="button"
-  onClick={() => setTab(t.key)}
-  className={`flex relative pb-3 transition-all flex-shrink-0
-    ${
-      tab === t.key
-        ? "text-edu-blue text-xl font-semibold"
-        : "text-[oklch(0.68_0_0)] text-xl font-medium hover:text-white"
-    }
-  `}
->
-  {t.label}
+        {[
+          { key: "overview", label: "Overview" },
+          { key: "assignments", label: "Assignments" },
+          { key: "students", label: "Students" },
+        ].map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`pb-3 text-xl relative transition-all
+              ${
+                tab === t.key
+                  ? "text-edu-blue font-bold"
+                  : "text-gray-400 hover:text-white"
+              }
+            `}
+          >
+            {t.label}
 
-  {tab === t.key && (
-    <span className="absolute -bottom-[1px] left-0 w-full h-[3px] bg-edu-blue rounded-full"></span>
-  )}
-</button>
-
-
-  ))}
-</div>
-
-
-
+            {tab === t.key && (
+              <span className="absolute -bottom-[1px] left-0 w-full h-[3px] bg-edu-blue rounded-full"></span>
+            )}
+          </button>
+        ))}
+      </div>
 
       {/* ---------- TAB CONTENT ---------- */}
       <motion.div
         key={tab}
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-8 mt-6"
+        className="space-y-8"
       >
-        {/* -------- Overview Tab -------- */}
+
+        {/* ===== Overview ===== */}
         {tab === "overview" && (
           <div className="space-y-8">
-            <div className="glass-card p-4 rounded-xl border border-white/10">
-              <h2 className="text-xl font-semibold text-white mb-3">
+
+            {/* Description */}
+            <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
+              <h2 className="text-xl font-semibold text-white flex items-center gap-2">
+                <NotebookText className="w-5 h-5 text-edu-purple" />
                 Class Overview
               </h2>
-              <p className="text-[oklch(0.68_0_0)]">
+
+              <p className="text-gray-300">
                 {classroom.description || "No description added."}
               </p>
-              {/* Teacher Info */}
-            <div className="mt-4 text-[oklch(0.68_0_0)]">
+
+              <div className="text-gray-300">
                 <span className="text-white font-medium">Teacher:</span>{" "}
                 {classroom.classTeacher?.name}
-            </div>
+              </div>
             </div>
 
             {/* Recent Assignments */}
-            <div className="glass-card p-4 rounded-xl border border-white/10">
-              <h3 className="text-xl text-white font-medium mb-3">
+            <div className="glass-card p-6 rounded-xl border border-white/10">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <ClipboardList className="w-5 h-5 text-edu-green" />
                 Recent Assignments
               </h3>
 
               {assignments.length === 0 ? (
                 <p className="text-gray-500">No assignments yet.</p>
               ) : (
-                <div className="space-y-4 mt-3">
-                  {assignments.sort((a, b) => 
-                    new Date(b.deadline).getTime() - new Date(a.deadline).getTime()
+                <div className="space-y-4">
+                  {assignments
+                    .sort(
+                      (a, b) =>
+                        new Date(b.deadline).getTime() -
+                        new Date(a.deadline).getTime()
                     )
                     .slice(0, 3)
                     .map((a) => (
+                      <div
+                        key={a.id}
+                        className="p-5 rounded-lg bg-white/5 border border-white/10 flex justify-between items-center hover:border-edu-blue transition cursor-pointer"
+                      >
+                        <div>
+                          <p className="text-white font-medium">{a.title}</p>
+                          <p className="text-gray-400 text-sm">{a.description}</p>
+                          <p className="text-gray-500 text-xs mt-1">
+                            Due: {a.deadline}
+                          </p>
+                        </div>
 
-                    <div
-                      key={a.id}
-                      className="p-5 rounded-lg bg-white/5 border border-white/10 hover:border-edu-blue transition"
-                    >
-                      <p className="text-white">{a.title}</p>
-                      <p className="text-gray-400 text-sm">{a.description}</p>
-                      <p className="text-gray-500 text-xs mt-1">
-                        Due: {a.deadline}
-                      </p>
-                    </div>
-                  ))}
+                        <ChevronRight className="w-5 h-5 text-gray-400" />
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
+
           </div>
         )}
 
-        {/* -------- Assignments Tab -------- */}
+        {/* ===== Assignments ===== */}
         {tab === "assignments" && (
-          <div className="glass-card p-4 rounded-xl border border-white/10 space-y-4">
-            <h2 className="text-xl text-white font-semibold mb-3">Assignments</h2>
+          <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
+            <h2 className="text-xl text-white font-semibold mb-3 flex items-center gap-2">
+              <ClipboardList className="w-5 h-5 text-edu-green" />
+              All Assignments
+            </h2>
 
             {assignments.length === 0 ? (
               <p className="text-gray-500">No assignments posted</p>
@@ -179,11 +198,17 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
                 {assignments.map((a) => (
                   <div
                     key={a.id}
-                    className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-edu-blue transition cursor-pointer"
+                    className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-edu-blue transition cursor-pointer flex justify-between items-center"
                   >
-                    <p className="text-white">{a.title}</p>
-                    <p className="text-gray-400 text-sm">{a.description}</p>
-                    <p className="text-gray-500 text-xs mt-1">Due: {a.deadline}</p>
+                    <div>
+                      <p className="text-white">{a.title}</p>
+                      <p className="text-gray-400 text-sm">{a.description}</p>
+                      <p className="text-gray-500 text-xs mt-1">
+                        Due: {a.deadline}
+                      </p>
+                    </div>
+
+                    <ChevronRight className="w-5 h-5 text-gray-400" />
                   </div>
                 ))}
               </div>
@@ -191,31 +216,24 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
           </div>
         )}
 
-        {/* -------- Students Tab -------- */}
+        {/* ===== Students ===== */}
         {tab === "students" && (
-          <div className="glass-card p-4 rounded-xl border border-white/10 space-y-4">
-            <h2 className="text-xl text-white font-semibold mb-3">
+          <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
+            <h2 className="text-xl text-white font-semibold mb-4 flex items-center gap-2">
+              <Users className="w-5 h-5 text-edu-purple" />
               Students
             </h2>
 
-            <p className="text-[oklch(0.68_0_0)]">
-              <span className="text-white font-medium">Teacher:</span>{" "}
-              {classroom.classTeacher?.name}
-            </p>
-
-            <h3 className="text-lg text-white font-medium mt-4 mb-2">
-              Classmates
-            </h3>
-
-            {!classroom.students ||classroom.students?.length === 0 ? (
+            {!classroom.students || classroom.students.length === 0 ? (
               <p className="text-gray-500">No students joined yet</p>
             ) : (
               <ul className="space-y-3">
                 {classroom.students.map((s: Student) => (
                   <li
                     key={s.id}
-                    className="p-4 rounded-lg bg-white/5 border border-white/10"
+                    className="p-4 rounded-lg bg-white/5 border border-white/10 flex items-center gap-3"
                   >
+                    <User className="w-6 h-6 text-edu-blue" />
                     <p className="text-white">{s.name}</p>
                   </li>
                 ))}
@@ -223,6 +241,7 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
             )}
           </div>
         )}
+
       </motion.div>
     </div>
   );

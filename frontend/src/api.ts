@@ -1,7 +1,4 @@
-import axios from 'axios';
-
-const API_BASE = 'http://localhost:5000/api/v1'; // backend URL
-axios.defaults.withCredentials = true;
+import api from './axios';
 
 interface RegisterData {
   firstName: string;
@@ -10,52 +7,68 @@ interface RegisterData {
   password: string;
   role: 'student' | 'teacher';
 }
-// Auth
-export const login = (email: string, password: string) =>
-  axios.post(`${API_BASE}/auth/login`, { email, password }, { withCredentials: true });
 
-export const register = (data:RegisterData) =>
-  axios.post(`${API_BASE}/auth/register`, data, { withCredentials: true });
-// Profile
+// --------------------
+// AUTH
+// --------------------
+export const login = async (email: string, password: string) => {
+  const res = await api.post('/auth/login', { email, password });
+
+  // store token
+  if (res.data.token) {
+    localStorage.setItem('token', res.data.token);
+  }
+
+  return res;
+};
+
+export const register = (data: RegisterData) =>
+  api.post('/auth/register', data);
+
 export const fetchProfile = () =>
-  axios.get(`${API_BASE}/auth/profile`, { withCredentials: true });
+  api.get('/auth/profile');
 
-// Assignments
-export const getAssignmentsByClassroom = (classroomId: string) =>
-  axios.get(`${API_BASE}/assignments/${classroomId}`, {
-    withCredentials: true,
-  });
-
-export const createAssignment = (data: any) =>
-  axios.post(`${API_BASE}/assignments`, data, { withCredentials: true });
-
-// Classrooms
+// --------------------
+// CLASSROOMS
+// --------------------
 export const createClassroom = (data: any) =>
-  axios.post(`${API_BASE}/classrooms`, data, { withCredentials: true });
+  api.post('/classrooms', data);
 
 export const joinClassroom = (code: string) =>
-  axios.post(`${API_BASE}/classrooms/join`, { code }, { withCredentials: true });
+  api.post('/classrooms/join', { code });
 
 export const getMyClassrooms = () =>
-  axios.get(`${API_BASE}/classrooms/my`, { withCredentials: true });
-export const getClassroomById = (classroomId: string) =>
-  axios.get(`${API_BASE}/classrooms/${classroomId}`, {
-    withCredentials: true,
-  });
+  api.get('/classrooms/my');
 
-// Submissions
+export const getClassroomById = (classroomId: string) =>
+  api.get(`/classrooms/${classroomId}`);
+
+// --------------------
+// ASSIGNMENTS
+// --------------------
+export const getAssignmentsByClassroom = (classroomId: string) =>
+  api.get(`/assignments/${classroomId}`);
+
+export const createAssignment = (data: any) =>
+  api.post('/assignments', data);
+
+// --------------------
+// SUBMISSIONS
+// --------------------
 export const submitAssignment = (data: any) =>
-  axios.post(`${API_BASE}/submissions`, data, { withCredentials: true });
+  api.post('/submissions', data);
 
 export const getMySubmissions = (assignmentId: string) =>
-  axios.get(`${API_BASE}/submissions/${assignmentId}/mine`, { withCredentials: true });
+  api.get(`/submissions/${assignmentId}/mine`);
 
 export const gradeSubmission = (submissionId: string, grade: number) =>
-  axios.patch(`${API_BASE}/submissions/${submissionId}/grade`, { grade }, { withCredentials: true });
+  api.patch(`/submissions/${submissionId}/grade`, { grade });
 
-// Comments
+// --------------------
+// COMMENTS
+// --------------------
 export const addComment = (data: any) =>
-  axios.post(`${API_BASE}/comments`, data, { withCredentials: true });
+  api.post('/comments', data);
 
 export const getComments = (assignmentId: string) =>
-  axios.get(`${API_BASE}/comments/${assignmentId}`, { withCredentials: true });
+  api.get(`/comments/${assignmentId}`);

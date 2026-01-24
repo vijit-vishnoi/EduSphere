@@ -1,15 +1,23 @@
 const jwt = require("jsonwebtoken");
 
 const protect = (req, res, next) => {
-  const token = req.cookies.token;  // <-- READ TOKEN FROM COOKIE
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
+  if (!authHeader) {
     return res.status(401).json({ message: "No token provided" });
   }
 
+  const parts = authHeader.split(" ");
+
+  if (parts.length !== 2 || parts[0] !== "Bearer") {
+    return res.status(401).json({ message: "Token malformed" });
+  }
+
+  const token = parts[1];
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;  // id + role from JWT
+    req.user = decoded; // { id, role }
     next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });

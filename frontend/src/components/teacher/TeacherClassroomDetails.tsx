@@ -115,7 +115,6 @@ export default function TeacherClassroomDetails({
                   className="flex items-center justify-between p-3 rounded bg-[var(--glass-bg)]"
                 >
                   <span>{stud.name}</span>
-                  <Badge variant="secondary">{stud.id}</Badge>
                 </div>
               ))
             )}
