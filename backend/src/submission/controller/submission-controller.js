@@ -62,24 +62,28 @@ const getAllSubmissionsForAssignment = async (req, res) => {
 
 const gradeSubmission = async (req, res) => {
   try {
-
+    console.log("📥 GRADE REQUEST HIT");
+    console.log("👉 Params:", req.params);
+    console.log("👉 Body:", req.body);
+    console.log("👉 Teacher ID:", req.user.id);
     const teacherId = req.user.id;
     const { submissionId } = req.params;
-    const { grade, feedback,assignmentId} = req.body;
-    if (req.user.role !== 'teacher') {
-      return res.status(403).json({ error: 'Only teachers can grade submissions' });
-    }
+    const { grade, feedback } = req.body;
+
     const updated = await submissionService.gradeSubmission({
       submissionId,
       teacherId,
       grade,
       feedback,
-      assignmentId,
     });
 
-    return res.status(200).json({ message: 'Submission graded', updated });
+    return res.status(200).json({
+      message: 'Submission graded successfully',
+      submission: updated,
+    });
   } catch (err) {
-    return res.status(403).json({ error: err.message });
+    console.error('Grade error:', err);
+    return res.status(400).json({ error: err.message });
   }
 };
 

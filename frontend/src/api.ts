@@ -69,8 +69,13 @@ export const submitAssignment = (formData: FormData) =>
 export const getMySubmissions = (assignmentId: string) =>
   api.get(`/submissions/${assignmentId}/mine`);
 
-export const gradeSubmission = (submissionId: string, grade: number) =>
-  api.patch(`/submissions/${submissionId}/grade`, { grade });
+export const getSubmissionsForAssignment = (assignmentId: string) =>
+  api.get(`/submissions/assignment/${assignmentId}`);
+
+export const gradeSubmission = (
+  submissionId: string,
+  payload: { grade: string; feedback?: string}) =>
+  api.patch(`/submissions/${submissionId}/grade`, payload);
 
 // --------------------
 // COMMENTS

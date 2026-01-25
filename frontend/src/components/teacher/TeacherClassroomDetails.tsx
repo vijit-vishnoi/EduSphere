@@ -11,11 +11,13 @@ import { getAssignmentsByClassroom } from "../../api";
 export default function TeacherClassroomDetails({
   classroomId,
   onTabChange,
-  setSelectedClassroom
+  setSelectedClassroom,
+  setSelectedAssignment
 }: {
   classroomId: string;
   onTabChange: (tab: string) => void;
   setSelectedClassroom: (id: string) => void;
+  setSelectedAssignment: (id: string) => void;
 }) {
   const [classroom, setClassroom] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -137,6 +139,10 @@ export default function TeacherClassroomDetails({
       assignments.map((a) => (
         <div
           key={a.id}
+          onClick={() => {
+          setSelectedAssignment(a.id);
+          onTabChange("assignment-submissions");
+        }}
           className="p-4 rounded-lg bg-[var(--glass-bg)] flex justify-between items-center hover:glow-blue transition"
         >
           <div>
@@ -151,11 +157,16 @@ export default function TeacherClassroomDetails({
                 : "No due date"}
             </p>
           </div>
+          <div className="flex items-center gap-3">
+                <Badge variant="outline" className="text-xs">
+                  View submissions
+                </Badge>
 
-          <Badge variant="secondary">
-            {a.points || 0} pts
-          </Badge>
-        </div>
+                <Badge variant="secondary">
+                  {a.points || 0} pts
+                </Badge>
+              </div>
+            </div>
       ))
     )}
   </CardContent>

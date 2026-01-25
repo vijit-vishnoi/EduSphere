@@ -33,8 +33,15 @@ class SubmissionRepository {
   return await Submission.findByPk(id);
 }
 async updateGrade(id, data) {
-    return await Submission.update(data, { where: { id } });
-  }
+  const submission = await this.Submission.findByPk(id);
+  if (!submission) return null;
+
+  submission.grade = data.grade;
+  submission.feedback = data.feedback;
+
+  await submission.save();
+  return submission;
+}
 
 }
 

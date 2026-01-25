@@ -8,7 +8,7 @@ class SubmissionService {
     this.submissionRepository = new SubmissionRepository();
   }
 
-  async submitAssignment({ assignmentId, studentId, content }) {
+  async submitAssignment({ assignmentId, studentId, content,fileUrl }) {
     const assignment = await Assignment.findByPk(assignmentId);
     if (!assignment) throw new Error('Assignment not found');
 
@@ -22,6 +22,7 @@ class SubmissionService {
       assignmentId,
       studentId,
       content,
+      fileUrl,
       submittedAt: new Date(),
     });
 
@@ -33,7 +34,7 @@ class SubmissionService {
       assignmentId,
       studentId,
     },
-    attributes: ['id', 'content', 'grade', 'feedback', 'createdAt'],
+    attributes: ['id', 'content', 'grade','fileUrl', 'feedback', 'createdAt'],
   });
 
   return submission;
@@ -51,26 +52,23 @@ class SubmissionService {
   return await this.submissionRepository.findByAssignmentId(assignmentId);
 }
 
-    async gradeSubmission({ submissionId, teacherId, grade, feedback,assignmentId }) {
-    try {
-      const submission = await this.submissionRepository.findById(submissionId);
-      const assignment = await Assignment.findByPk(assignmentId);
-      if (!assignment) throw new Error('Assignment not found');
+   async gradeSubmission({ submissionId, teacherId, grade, feedback }) {
+  const submission = await this.submissionRepository.findById(submissionId);
+  if (!submission) throw new Error('Submission not found');
 
-      if (!submission) throw new Error('Submission not found');
-      if (assignment.teacherId !== teacherId) {
-        throw new Error('You are not authorized to grade this submission');
-      }
+  const assignment = await Assignment.findByPk(submission.assignmentId);
+  if (!assignment) throw new Error('Assignment not found');
 
-      return await this.submissionRepository.updateGrade(submissionId, {
-        grade,
-        feedback,
-      });
-    } catch (err) {
-      console.error('Error grading submission:', err);
-      throw err; 
-    }
+  if (assignment.teacherId !== teacherId) {
+    throw new Error('You are not authorized to grade this submission');
   }
+
+  return await this.submissionRepository.updateGrade(submissionId, {
+    grade,
+    feedback,
+  });
+}
+
 
 
 }

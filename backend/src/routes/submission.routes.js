@@ -18,5 +18,19 @@ router.get(
   authorizeRoles("student"),
   controller.getMySubmission
 );
+router.get(
+  '/assignment/:assignmentId',
+  protect,
+  authorizeRoles('teacher'),
+  controller.getAllSubmissionsForAssignment
+);
+
+router.patch(
+  '/:submissionId/grade',
+  protect,
+  authorizeRoles('teacher'),
+  controller.gradeSubmission
+);
+
 
 module.exports = router;

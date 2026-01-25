@@ -11,7 +11,7 @@ import TeacherNotifications from './teacher/TeacherNotifications';
 import TeacherProfile from './teacher/TeacherProfile';
 import TeacherClassroomDetails from './teacher/TeacherClassroomDetails';
 import TeacherCreateAssignment from './teacher/TeacherCreateAssignment';
-
+import TeacherAssignmentSubmissions from './teacher/TeacherAssignmentSubmission';
 
 interface TeacherDashboardProps {
   onLogout: () => void;
@@ -21,6 +21,7 @@ export default function TeacherDashboard({ onLogout }: TeacherDashboardProps) {
   const [activeTab, setActiveTab] = useState('overview');
   const [notificationCount] = useState(8);
   const [selectedClassroom, setSelectedClassroom] = useState<string | null>(null);
+  const [selectedAssignment, setSelectedAssignment] = useState<string | null>(null);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -33,6 +34,7 @@ export default function TeacherDashboard({ onLogout }: TeacherDashboardProps) {
             classroomId={selectedClassroom}
             onTabChange={setActiveTab}
             setSelectedClassroom={setSelectedClassroom}
+            setSelectedAssignment={setSelectedAssignment}
           />
         );
       case 'create-assignment':
@@ -40,6 +42,16 @@ export default function TeacherDashboard({ onLogout }: TeacherDashboardProps) {
           <TeacherCreateAssignment
             classroomId={selectedClassroom!}
             onTabChange={setActiveTab}
+          />
+        );
+        case 'assignment-submissions':
+          if (!selectedAssignment) {
+            return <div className="p-6">No assignment selected</div>;
+          }
+        return (
+          <TeacherAssignmentSubmissions
+            assignmentId={selectedAssignment}
+            onBack={() => setActiveTab('classroom-details')}
           />
         );
       case 'classrooms':

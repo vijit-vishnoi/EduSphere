@@ -5,16 +5,19 @@ const app = express();
 const cors=require ('cors');
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+const path = require('path');
+
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000', // React frontend URL
-  credentials: true, // allows cookies if needed
+  origin: 'http://localhost:3000', 
+  credentials: true, 
 }));
-// Load all routes from routes/index.js
-const routes = require('./routes');
-app.use('/api/v1', routes); // ✅ Everything is routed through this
 
+const routes = require('./routes');
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+app.use('/api/v1', routes); 
 app.listen(PORT, async () => {
   console.log(`Server started on Port: ${PORT}`);
 });
