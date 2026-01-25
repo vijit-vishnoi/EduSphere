@@ -9,6 +9,9 @@ import StudentClassrooms from './student/StudentClassrooms';
 import StudentJoinClassroom from './student/StudentJoinClassroom';
 import StudentClassroomDetails from './student/StudentClassroomDetails';
 import StudentAssignmentPage from './student/StudentAssignmentsPage';
+import { useEffect } from 'react';
+import { connectSocket } from "../socket";
+import { fetchProfile } from "../api";
 
 interface StudentDashboardProps {
   onLogout: () => void;
@@ -21,6 +24,25 @@ const [selectedClassroom, setSelectedClassroom] = useState<string>("");
 const [selectedAssignment, setSelectedAssignment] = useState<string>("");
 
   const [notificationCount] = useState(5);
+  useEffect(() => {
+  const initSocket = async () => {
+    try {
+      const res = await fetchProfile();
+      const userId = res.data.user.id;
+
+      const socket = connectSocket(userId);
+
+      // temporary test listener
+      socket.on("notification", (data: any) => {
+        console.log("🔔 Student notification:", data);
+      });
+    } catch (err) {
+      console.error("Socket init failed:", err);
+    }
+  };
+
+  initSocket();
+}, []);
 
   const renderContent = () => {
     switch (activeTab) {

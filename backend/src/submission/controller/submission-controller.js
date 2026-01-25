@@ -16,6 +16,14 @@ const submitAssignment = async (req, res) => {
       content,
       fileUrl,
     });
+    const io = req.app.get("io");
+
+    // after submission is created
+    io.to(`user_${assignment.teacherId}`).emit("notification", {
+      type: "NEW_SUBMISSION",
+      message: "New assignment submission received",
+      assignmentId,
+    });
 
     return res.status(201).json({ submission });
   } catch (err) {
@@ -62,10 +70,7 @@ const getAllSubmissionsForAssignment = async (req, res) => {
 
 const gradeSubmission = async (req, res) => {
   try {
-    console.log("📥 GRADE REQUEST HIT");
-    console.log("👉 Params:", req.params);
-    console.log("👉 Body:", req.body);
-    console.log("👉 Teacher ID:", req.user.id);
+    
     const teacherId = req.user.id;
     const { submissionId } = req.params;
     const { grade, feedback } = req.body;
@@ -75,6 +80,13 @@ const gradeSubmission = async (req, res) => {
       teacherId,
       grade,
       feedback,
+    });
+    const io = req.app.get("io");
+    // submission.studentId exists
+    io.to(`user_${submission.studentId}`).emit("notification", {
+      type: "GRADED",
+      message: "Your assignment has been graded",
+      assignmentId: submission.assignmentId,
     });
 
     return res.status(200).json({

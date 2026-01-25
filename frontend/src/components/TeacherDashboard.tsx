@@ -12,6 +12,9 @@ import TeacherProfile from './teacher/TeacherProfile';
 import TeacherClassroomDetails from './teacher/TeacherClassroomDetails';
 import TeacherCreateAssignment from './teacher/TeacherCreateAssignment';
 import TeacherAssignmentSubmissions from './teacher/TeacherAssignmentSubmission';
+import { useEffect } from "react";
+import { connectSocket } from "../socket";
+import { fetchProfile } from "../api";
 
 interface TeacherDashboardProps {
   onLogout: () => void;
@@ -22,7 +25,25 @@ export default function TeacherDashboard({ onLogout }: TeacherDashboardProps) {
   const [notificationCount] = useState(8);
   const [selectedClassroom, setSelectedClassroom] = useState<string | null>(null);
   const [selectedAssignment, setSelectedAssignment] = useState<string | null>(null);
+  useEffect(() => {
+  const initSocket = async () => {
+    try {
+      const res = await fetchProfile();
+      const userId = res.data.user.id;
 
+      const socket = connectSocket(userId);
+
+      // optional: teacher notifications
+      socket.on("notification", (data: any) => {
+        console.log("🔔 Teacher notification:", data);
+      });
+    } catch (err) {
+      console.error("Socket init failed:", err);
+    }
+  };
+
+  initSocket();
+}, []);
   const renderContent = () => {
     switch (activeTab) {
       case 'overview':
