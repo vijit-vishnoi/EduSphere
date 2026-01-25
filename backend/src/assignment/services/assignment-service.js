@@ -19,8 +19,12 @@ const createAssignment = async (body, teacherId) => {
 const getAssignmentsByClassroom = async (classroomId) => {
   return assignmentRepo.getAssignmentsByClassroom(classroomId);
 };
+const getAssignmentById = async (assignmentId) => {
+  return assignmentRepo.getAssignmentById(assignmentId);
+};
 
 module.exports = {
   createAssignment,
-  getAssignmentsByClassroom
+  getAssignmentsByClassroom,
+  getAssignmentById
 };

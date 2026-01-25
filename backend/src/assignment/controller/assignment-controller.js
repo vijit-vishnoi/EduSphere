@@ -26,5 +26,24 @@ const getAssignmentsByClassroom = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 };
+const getAssignmentById = async (req, res) => {
+  try {
+    const assignmentId = req.params.assignmentId;
 
-module.exports = { createAssignment, getAssignmentsByClassroom };
+    const assignment = await assignmentService.getAssignmentById(assignmentId);
+
+    if (!assignment) {
+      return res.status(404).json({ message: "Assignment not found" });
+    }
+
+    return res.status(200).json({ assignment });
+  } catch (err) {
+    console.error("Error fetching assignment:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+
+module.exports = { createAssignment, getAssignmentsByClassroom,getAssignmentById };

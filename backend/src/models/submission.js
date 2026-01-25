@@ -27,7 +27,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     content: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true,
+    },
+    fileUrl: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     submittedAt: {
       type: DataTypes.DATE,

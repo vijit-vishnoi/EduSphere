@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Sidebar from './Sidebar';
 import StudentOverview from './student/StudentOverview';
-import StudentAssignments from './student/StudentAssignments';
 import StudentComments from './student/StudentComments';
 import StudentNotifications from './student/StudentNotifications';
 import StudentProfile from './student/StudentProfile';
 import StudentClassrooms from './student/StudentClassrooms';
 import StudentJoinClassroom from './student/StudentJoinClassroom';
 import StudentClassroomDetails from './student/StudentClassroomDetails';
+import StudentAssignmentPage from './student/StudentAssignmentsPage';
 
 interface StudentDashboardProps {
   onLogout: () => void;
@@ -18,6 +18,7 @@ export default function StudentDashboard({ onLogout }: StudentDashboardProps) {
   const [activeTab, setActiveTab] = useState('overview');
   const [currentTab, setCurrentTab] = useState("classrooms");
 const [selectedClassroom, setSelectedClassroom] = useState<string>("");
+const [selectedAssignment, setSelectedAssignment] = useState<string>("");
 
   const [notificationCount] = useState(5);
 
@@ -25,8 +26,6 @@ const [selectedClassroom, setSelectedClassroom] = useState<string>("");
     switch (activeTab) {
       case 'overview':
         return <StudentOverview />;
-      case 'assignments':
-        return <StudentAssignments />;
       case 'classrooms':
         return <StudentClassrooms
           onTabChange={setActiveTab}
@@ -35,6 +34,8 @@ const [selectedClassroom, setSelectedClassroom] = useState<string>("");
       case 'classroom-details':
       return <StudentClassroomDetails 
     classroomId={selectedClassroom}
+    onTabChange={setActiveTab}
+    setSelectedAssignment={setSelectedAssignment}
 />
 
       case 'join-classroom':
@@ -47,6 +48,14 @@ const [selectedClassroom, setSelectedClassroom] = useState<string>("");
         return <StudentProfile />;
       default:
         return <StudentOverview />;
+        case 'assignment-details':
+        return (
+          <StudentAssignmentPage
+            assignmentId={selectedAssignment}
+            onBack={() => setActiveTab('classroom-details')}
+          />
+  );
+
     }
   };
 

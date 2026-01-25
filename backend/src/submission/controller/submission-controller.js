@@ -1,17 +1,26 @@
 const SubmissionService = require('../service/submission-serivce');
 const submissionService = new SubmissionService();
 
-const createSubmission = async (req, res) => {
+const submitAssignment = async (req, res) => {
   try {
     const studentId = req.user.id;
     const { assignmentId, content } = req.body;
 
-    const submission = await submissionService.submitAssignment({ assignmentId, studentId, content });
+    const fileUrl = req.file
+      ? `/uploads/submissions/${req.file.filename}`
+      : null;
 
-    res.status(201).json({ message: 'Submission successful', submission });
-  } catch (error) {
-    console.error('Error creating submission:', error);
-    return res.status(400).json({ message: error.message });
+    const submission = await submissionService.submitAssignment({
+      assignmentId,
+      studentId,
+      content,
+      fileUrl,
+    });
+
+    return res.status(201).json({ submission });
+  } catch (err) {
+    console.error("Submission error:", err);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -76,7 +85,7 @@ const gradeSubmission = async (req, res) => {
 
 
 module.exports = {
-  createSubmission,
+  submitAssignment,
   getMySubmission,
   getAllSubmissionsForAssignment,
   gradeSubmission

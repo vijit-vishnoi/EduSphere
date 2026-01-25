@@ -10,8 +10,12 @@ const getAssignmentsByClassroom = async (classroomId) => {
     order: [['dueDate', 'ASC']],
   });
 };
+const getAssignmentById = async (id) => {
+  return Assignment.findByPk(id);
+};
 
 module.exports = {
   createAssignment,
   getAssignmentsByClassroom,
+  getAssignmentById,
 };

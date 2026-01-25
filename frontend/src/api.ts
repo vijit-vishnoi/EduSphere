@@ -46,8 +46,11 @@ export const getClassroomById = (classroomId: string) =>
 // --------------------
 // ASSIGNMENTS
 // --------------------
+export const getAssignmentById = (assignmentId: string) =>
+  api.get(`/assignments/${assignmentId}`);
+
 export const getAssignmentsByClassroom = (classroomId: string) =>
-  api.get(`/assignments/${classroomId}`);
+  api.get(`/assignments/classroom/${classroomId}`);
 
 export const createAssignment = (data: any) =>
   api.post('/assignments', data);
@@ -55,8 +58,13 @@ export const createAssignment = (data: any) =>
 // --------------------
 // SUBMISSIONS
 // --------------------
-export const submitAssignment = (data: any) =>
-  api.post('/submissions', data);
+export const submitAssignment = (formData: FormData) =>
+  api.post('/submissions', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
 
 export const getMySubmissions = (assignmentId: string) =>
   api.get(`/submissions/${assignmentId}/mine`);

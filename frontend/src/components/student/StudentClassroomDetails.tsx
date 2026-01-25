@@ -12,6 +12,8 @@ import {
 
 interface Props {
   classroomId: string;
+  onTabChange: (tab: string) => void;
+  setSelectedAssignment: (id: string) => void;
 }
 
 interface Student {
@@ -19,7 +21,9 @@ interface Student {
   name: string;
 }
 
-export default function StudentClassroomDetails({ classroomId }: Props) {
+export default function StudentClassroomDetails({classroomId,
+  onTabChange,
+  setSelectedAssignment, }: Props) {
   const [loading, setLoading] = useState(true);
   const [classroom, setClassroom] = useState<any>(null);
   const [assignments, setAssignments] = useState<any[]>([]);
@@ -163,13 +167,17 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
                     .map((a) => (
                       <div
                         key={a.id}
+                        onClick={() => {
+                          setSelectedAssignment(a.id);
+                          onTabChange("assignment-details");
+                        }}
                         className="p-5 rounded-lg bg-white/5 border border-white/10 flex justify-between items-center hover:border-edu-blue transition cursor-pointer"
                       >
                         <div>
                           <p className="text-white font-medium">{a.title}</p>
                           <p className="text-gray-400 text-sm">{a.description}</p>
                           <p className="text-gray-500 text-xs mt-1">
-                            Due: {a.deadline}
+                            Due: {a.dueDate}
                           </p>
                         </div>
 
@@ -198,13 +206,17 @@ export default function StudentClassroomDetails({ classroomId }: Props) {
                 {assignments.map((a) => (
                   <div
                     key={a.id}
+                    onClick={() => {
+                      setSelectedAssignment(a.id);
+                      onTabChange("assignment-details");
+                    }}
                     className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-edu-blue transition cursor-pointer flex justify-between items-center"
                   >
                     <div>
                       <p className="text-white">{a.title}</p>
                       <p className="text-gray-400 text-sm">{a.description}</p>
                       <p className="text-gray-500 text-xs mt-1">
-                        Due: {a.deadline}
+                        Due: {a.dueDate}
                       </p>
                     </div>
 

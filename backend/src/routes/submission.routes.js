@@ -1,14 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const controller = require('../submission/controller/submission-controller');
-const { protect, authorizeRoles } = require('../middleware/authMiddleware');
-const { getMySubmission,gradeSubmission } = require('../submission/controller/submission-controller');
+const controller = require("../submission/controller/submission-controller");
+const { protect, authorizeRoles } = require("../middleware/authMiddleware");
+const upload = require("../middleware/upload");
 
+router.post(
+  "/",
+  protect,
+  authorizeRoles("student"),
+  upload.single("file"),
+  controller.submitAssignment
+);
 
-router.post('/', protect, authorizeRoles('student'), controller.createSubmission);
-router.get('/:assignmentId/mine', protect, authorizeRoles('student'), getMySubmission);
-router.get('/:assignmentId/all', protect, controller.getAllSubmissionsForAssignment); 
-router.patch('/:submissionId/grade', protect, authorizeRoles('teacher'),gradeSubmission);
-
+router.get(
+  "/:assignmentId/mine",
+  protect,
+  authorizeRoles("student"),
+  controller.getMySubmission
+);
 
 module.exports = router;
