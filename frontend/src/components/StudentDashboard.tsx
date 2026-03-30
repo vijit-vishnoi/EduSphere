@@ -32,7 +32,6 @@ const [selectedAssignment, setSelectedAssignment] = useState<string>("");
 
       const socket = connectSocket(userId);
 
-      // temporary test listener
       socket.on("notification", (data: any) => {
         console.log("🔔 Student notification:", data);
       });

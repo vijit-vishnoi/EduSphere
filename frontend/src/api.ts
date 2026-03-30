@@ -8,13 +8,9 @@ interface RegisterData {
   role: 'student' | 'teacher';
 }
 
-// --------------------
-// AUTH
-// --------------------
 export const login = async (email: string, password: string) => {
   const res = await api.post('/auth/login', { email, password });
 
-  // store token
   if (res.data.token) {
     localStorage.setItem('token', res.data.token);
   }
@@ -28,9 +24,6 @@ export const register = (data: RegisterData) =>
 export const fetchProfile = () =>
   api.get('/auth/profile');
 
-// --------------------
-// CLASSROOMS
-// --------------------
 export const createClassroom = (data: any) =>
   api.post('/classrooms', data);
 
@@ -43,9 +36,6 @@ export const getMyClassrooms = () =>
 export const getClassroomById = (classroomId: string) =>
   api.get(`/classrooms/${classroomId}`);
 
-// --------------------
-// ASSIGNMENTS
-// --------------------
 export const getAssignmentById = (assignmentId: string) =>
   api.get(`/assignments/${assignmentId}`);
 
@@ -55,9 +45,6 @@ export const getAssignmentsByClassroom = (classroomId: string) =>
 export const createAssignment = (data: any) =>
   api.post('/assignments', data);
 
-// --------------------
-// SUBMISSIONS
-// --------------------
 export const submitAssignment = (formData: FormData) =>
   api.post('/submissions', formData, {
     headers: {
@@ -77,9 +64,6 @@ export const gradeSubmission = (
   payload: { grade: string; feedback?: string}) =>
   api.patch(`/submissions/${submissionId}/grade`, payload);
 
-// --------------------
-// COMMENTS
-// --------------------
 export const addComment = (data: any) =>
   api.post('/comments', data);
 

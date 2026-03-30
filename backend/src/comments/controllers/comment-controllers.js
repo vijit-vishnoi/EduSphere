@@ -1,10 +1,9 @@
-// controllers/commentController.js
 const commentService = require('../services/comment-service');
 
 const createComment = async (req, res) => {
   try {
     const { content, assignmentId } = req.body;
-    const userId = req.user.id; // assuming req.user is set via auth middleware
+    const userId = req.user.id; 
 
     if (!content || !assignmentId) {
       return res.status(400).json({ error: 'Missing content or assignmentId' });

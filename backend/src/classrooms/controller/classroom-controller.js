@@ -1,11 +1,7 @@
-// src/controllers/classroom-controller.js
 const ClassroomService = require('../services/classroom-service');
 const classroomService = new ClassroomService();
 const { User, Classroom, Assignment } = require('../../models');
 
-// -----------------------------------------
-// CREATE CLASSROOM
-// -----------------------------------------
 exports.createClassroom = async (req, res) => {
   try {
     if (req.user.role !== 'teacher')
@@ -25,10 +21,6 @@ exports.createClassroom = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-// -----------------------------------------
-// JOIN CLASSROOM
-// -----------------------------------------
 exports.joinClassroom = async (req, res) => {
   try {
     const classroom = await classroomService.joinClassroom({
@@ -42,9 +34,6 @@ exports.joinClassroom = async (req, res) => {
   }
 };
 
-// -----------------------------------------
-// GET MY CLASSROOMS
-// -----------------------------------------
 exports.getMyClassrooms = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -52,7 +41,6 @@ exports.getMyClassrooms = async (req, res) => {
 
     let classrooms = [];
 
-    // TEACHER VIEW
     if (role === 'teacher') {
       const teacherClasses = await Classroom.findAll({
         where: { teacherId: userId },
@@ -74,7 +62,6 @@ exports.getMyClassrooms = async (req, res) => {
       }));
     }
 
-    // STUDENT VIEW
     if (role === 'student') {
       const student = await User.findByPk(userId, {
         include: {
@@ -104,10 +91,6 @@ exports.getMyClassrooms = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
-// -----------------------------------------
-// GET CLASSROOM DETAILS
-// -----------------------------------------
 exports.getClassroomById = async (req, res) => {
   try {
     const classroom = await Classroom.findByPk(req.params.id, {
@@ -125,9 +108,6 @@ exports.getClassroomById = async (req, res) => {
   }
 };
 
-// -----------------------------------------
-// REMOVE STUDENT
-// -----------------------------------------
 exports.removeStudentFromClassroom = async (req, res) => {
   try {
     if (req.user.role !== 'teacher')
@@ -147,9 +127,6 @@ exports.removeStudentFromClassroom = async (req, res) => {
   }
 };
 
-// -----------------------------------------
-// LEAVE CLASSROOM
-// -----------------------------------------
 exports.leaveClassroom = async (req, res) => {
   try {
     const result = await classroomService.leaveClassroom({

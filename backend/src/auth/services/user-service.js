@@ -26,7 +26,6 @@ class UserService {
     const existing = await this.userRepository.findByEmail(email);
     if (existing) throw new Error('Email already in use');
 
-    // Directly save password without hashing
     const user = await this.userRepository.create({ name, email, password, role });
 
     const token = generateToken(user);
@@ -37,7 +36,6 @@ class UserService {
     const user = await this.userRepository.findByEmail(email);
     if (!user) throw new Error('User not found');
 
-    // Direct string comparison
     if (user.password !== password) {
       throw new Error('Invalid credentials');
     }

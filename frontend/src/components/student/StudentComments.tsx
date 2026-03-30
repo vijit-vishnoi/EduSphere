@@ -119,7 +119,6 @@ export default function StudentComments() {
           </div>
         </div>
 
-        {/* Post New Comment */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -158,7 +157,6 @@ export default function StudentComments() {
           </Card>
         </motion.div>
 
-        {/* Comments List */}
         <div className="space-y-6">
           {comments.map((comment, index) => (
             <motion.div
@@ -169,7 +167,6 @@ export default function StudentComments() {
             >
               <Card className="glass-card border-0">
                 <CardContent className="p-6">
-                  {/* Main Comment */}
                   <div className="space-y-4">
                     <div className="flex items-start space-x-4">
                       <Avatar className="w-10 h-10">
@@ -208,7 +205,6 @@ export default function StudentComments() {
                       </div>
                     </div>
 
-                    {/* Reply Form */}
                     {replyingTo === comment.id && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
@@ -240,7 +236,6 @@ export default function StudentComments() {
                       </motion.div>
                     )}
 
-                    {/* Replies */}
                     {comment.replies.length > 0 && (
                       <div className="ml-14 space-y-4 border-l-2 border-[var(--glass-border)] pl-4">
                         {comment.replies.map((reply, replyIndex) => (
@@ -283,7 +278,6 @@ export default function StudentComments() {
           ))}
         </div>
 
-        {/* Pagination */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -25,7 +25,6 @@ import {
   Copy
 } from 'lucide-react';
 
-// SUBJECT ICONS + COLORS
 const subjectIcons: Record<string, any> = {
   "Web Development": Globe,
   "Computer Science": Cpu,
@@ -87,7 +86,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
 };
 
 
-  // Preview mode
   if (previewMode) {
     const Icon = BookOpen;
     const colorClass =  "text-edu-blue";
@@ -99,7 +97,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
           animate={{ opacity: 1, y: 0 }}
           className="space-y-6"
         >
-          {/* Header */}
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-3xl neon-blue">Classroom Preview</h1>
@@ -115,7 +112,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
             </Button>
           </div>
 
-          {/* Preview Card */}
           <Card className="glass-card border-0">
             <CardHeader>
               <CardTitle className="text-2xl neon-blue flex items-center gap-3">
@@ -178,10 +174,8 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          {/* LEFT MAIN FORM */}
           <div className="lg:col-span-2 space-y-6">
             
-            {/* Basic Info */}
             <Card className="glass-card border-0">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -192,7 +186,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
 
               <CardContent className="space-y-4">
                 
-                {/* Name & Subject */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   
                   <div className="space-y-2">
@@ -206,7 +199,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
                   </div>
                 </div>
 
-                {/* Description */}
                 <div className="space-y-2">
                   <Label>Description (Optional)</Label>
                   <Textarea
@@ -221,10 +213,8 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
             </Card>
           </div>
 
-          {/* RIGHT SIDEBAR SETTINGS */}
           <div className="space-y-6">
 
-            {/* Settings */}
             <Card className="glass-card border-0">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -235,7 +225,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
 
               <CardContent className="space-y-6">
 
-                {/* Join Option */}
                 <div className="flex items-center justify-between">
                   <div>
                     <Label>Allow Joining with Code</Label>
@@ -251,7 +240,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
                   />
                 </div>
 
-                {/* Classroom Code Placeholder */}
                 <div className="p-4 glass border border-[var(--glass-border)] rounded-lg">
                   <p className="text-sm text-muted-foreground">Classroom Code:</p>
                   <p className="font-mono text-edu-blue mt-1">
@@ -262,7 +250,6 @@ export default function TeacherCreateClassroom({onTabChange,}:TeacherCreateClass
               </CardContent>
             </Card>
 
-            {/* Create Button */}
             <Button
               onClick={handleCreate}
               className="w-full bg-gradient-to-r from-[var(--neon-green)] to-[var(--neon-blue)] hover:glow-green text-background"

@@ -11,12 +11,12 @@ export const connectSocket = (userId: number) => {
     });
 
     socket.on("connect", () => {
-      console.log("🟢 Socket connected:", socket?.id);
+      console.log(" Socket connected:", socket?.id);
       socket?.emit("join", userId);
     });
 
     socket.on("disconnect", () => {
-      console.log("🔴 Socket disconnected");
+      console.log(" Socket disconnected");
     });
   }
 

@@ -55,7 +55,6 @@ export default function TeacherClassroomDetails({
         animate={{ opacity: 1, y: 0 }}
         className="space-y-8"
       >
-        {/* Header */}
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl text-edu-blue">{classroom.name}</h1>
@@ -86,7 +85,6 @@ export default function TeacherClassroomDetails({
           </div>
         </div>
 
-        {/* Description */}
         <Card className="glass-card border-0">
           <CardHeader>
             <CardTitle className="text-edu-blue">Description</CardTitle>
@@ -98,7 +96,6 @@ export default function TeacherClassroomDetails({
           </CardContent>
         </Card>
 
-        {/* Students Section */}
         <Card className="glass-card border-0">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">

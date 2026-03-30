@@ -33,7 +33,6 @@ export default function TeacherDashboard({ onLogout }: TeacherDashboardProps) {
 
       const socket = connectSocket(userId);
 
-      // optional: teacher notifications
       socket.on("notification", (data: any) => {
         console.log("🔔 Teacher notification:", data);
       });

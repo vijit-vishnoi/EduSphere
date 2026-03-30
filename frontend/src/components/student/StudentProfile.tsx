@@ -70,7 +70,6 @@ export default function StudentProfile() {
 
   const handleSave = () => {
     setIsEditing(false);
-    // Save profile data
     console.log('Saving profile:', profile);
   };
 
@@ -81,7 +80,6 @@ export default function StudentProfile() {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-6"
       >
-        {/* Header */}
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl neon-purple">Profile & Settings</h1>
@@ -101,9 +99,7 @@ export default function StudentProfile() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Profile Information */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Basic Info */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -232,7 +228,6 @@ export default function StudentProfile() {
               </Card>
             </motion.div>
 
-            {/* Academic Progress */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -271,9 +266,7 @@ export default function StudentProfile() {
             </motion.div>
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
-            {/* Quick Stats */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -306,7 +299,6 @@ export default function StudentProfile() {
               </Card>
             </motion.div>
 
-            {/* Achievements */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -345,7 +337,6 @@ export default function StudentProfile() {
               </Card>
             </motion.div>
 
-            {/* Privacy Settings */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -378,7 +369,6 @@ export default function StudentProfile() {
               </Card>
             </motion.div>
 
-            {/* Theme Settings */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}

@@ -55,7 +55,6 @@ export default function Sidebar({
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="w-64 h-screen edu-card border-r border-[var(--edu-border)] flex flex-col"
     >
-      {/* Logo */}
       <div className="p-6 border-b border-[var(--edu-border)]">
         <motion.div
           className="flex items-center space-x-3"
@@ -74,7 +73,6 @@ export default function Sidebar({
         </motion.div>
       </div>
 
-      {/* Search */}
       <div className="p-4 border-b border-[var(--edu-border)]">
         <div className="relative">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -86,7 +84,6 @@ export default function Sidebar({
         </div>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
         {menuItems.map((item, index) => (
           <motion.div
@@ -121,7 +118,6 @@ export default function Sidebar({
         ))}
       </nav>
 
-      {/* Settings & Logout */}
       <div className="p-4 border-t border-[var(--edu-border)] space-y-2">
         <motion.div
           whileHover={{ scale: 1.02 }}

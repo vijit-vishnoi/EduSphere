@@ -58,7 +58,6 @@ export default function TeacherCreateAssignment({
         animate={{ opacity: 1, y: 0 }}
         className="space-y-8 max-w-3xl mx-auto"
       >
-        {/* Header */}
         <div>
           <h1 className="text-3xl text-edu-blue font-semibold">
             Create Assignment
@@ -68,7 +67,6 @@ export default function TeacherCreateAssignment({
           </p>
         </div>
 
-        {/* Card */}
         <Card className="glass-card border border-[var(--edu-border)]">
           <CardHeader>
             <CardTitle className="text-lg text-edu-blue">
@@ -78,7 +76,6 @@ export default function TeacherCreateAssignment({
 
           <CardContent className="space-y-6">
 
-            {/* Title */}
             <div className="space-y-2">
               <Label>Assignment Title *</Label>
               <Input
@@ -89,7 +86,6 @@ export default function TeacherCreateAssignment({
               />
             </div>
 
-            {/* Description */}
             <div className="space-y-2">
               <Label>Description</Label>
               <Textarea
@@ -102,7 +98,6 @@ export default function TeacherCreateAssignment({
               />
             </div>
 
-            {/* Due Date */}
             <div className="space-y-2">
               <Label>Due Date</Label>
               <Popover>
@@ -125,7 +120,6 @@ export default function TeacherCreateAssignment({
               </Popover>
             </div>
 
-            {/* Max Points */}
             <div className="space-y-2">
               <Label>Maximum Points</Label>
               <Input
@@ -139,7 +133,6 @@ export default function TeacherCreateAssignment({
               />
             </div>
 
-            {/* Allow Late Submissions */}
             <div className="flex items-center justify-between">
               <Label>Allow Late Submissions</Label>
               <Switch
@@ -149,7 +142,6 @@ export default function TeacherCreateAssignment({
                 }
               />
             </div>
-            {/* Require Text Submission */}
             <div className="flex items-center justify-between">
               <Label>Require Text Submission</Label>
               <Switch
@@ -160,7 +152,6 @@ export default function TeacherCreateAssignment({
               />
             </div>
 
-            {/* Require File Upload */}
             <div className="flex items-center justify-between">
               <Label>Require File Upload</Label>
               <Switch
@@ -173,7 +164,6 @@ export default function TeacherCreateAssignment({
           </CardContent>
         </Card>
 
-        {/* Actions */}
         <div className="flex gap-4">
           <Button
             className="bg-gradient-to-r from-[var(--neon-green)] to-[var(--neon-blue)] text-background hover:glow-green"

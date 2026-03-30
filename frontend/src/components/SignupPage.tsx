@@ -57,7 +57,6 @@ onSignup(userRole);
   };
 
   const nextStep = () => {
-  // Example validations
   if (currentStep === 0) {
     if (!formData.firstName || !formData.lastName) {
       alert('Please fill in your name.');
@@ -68,7 +67,6 @@ onSignup(userRole);
       alert('Please enter your email.');
       return;
     }
-    // You can also add email regex validation
   } else if (currentStep === 2) {
     if (!formData.password || !formData.confirmPassword) {
       alert('Please fill in your password.');
@@ -115,7 +113,6 @@ onSignup(userRole);
               Create your account and start your learning journey
             </CardDescription>
 
-            {/* Progress Steps */}
             <div className="flex justify-center space-x-4 mt-6">
               {steps.map((step, index) => (
                 <motion.div
@@ -141,7 +138,6 @@ onSignup(userRole);
           <CardContent className="space-y-6">
             <div
               onKeyDown={(e) => {
-                // Prevent Enter key from triggering any accidental submit
                 if (e.key === "Enter") e.preventDefault();
               }}
               className="space-y-4"

@@ -29,7 +29,6 @@ export default function StudentJoinClassroom({
 
       toast.success("Successfully joined classroom!");
 
-      // Redirect back to classroom list
       onTabChange("classrooms");
 
     } catch (err: any) {
@@ -47,7 +46,6 @@ export default function StudentJoinClassroom({
         animate={{ opacity: 1, y: 0 }}
         className="space-y-6"
       >
-        {/* Header */}
         <div>
           <h1 className="text-3xl text-edu-blue">Join a Classroom</h1>
           <p className="text-muted-foreground">
@@ -55,7 +53,6 @@ export default function StudentJoinClassroom({
           </p>
         </div>
 
-        {/* Join Card */}
         <Card className="glass-card border-0">
           <CardHeader>
             <CardTitle className="text-xl text-edu-blue">
@@ -85,7 +82,6 @@ export default function StudentJoinClassroom({
           </CardContent>
         </Card>
 
-        {/* Back Button */}
         <Button
           variant="outline"
           className="glass hover:glow-blue"

@@ -1,4 +1,3 @@
-// src/repository/classroom-repository.js
 const { Classroom, User, Assignment, ClassroomStudent } = require('../../models');
 
 class ClassroomRepository {

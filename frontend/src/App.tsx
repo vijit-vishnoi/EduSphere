@@ -25,7 +25,7 @@ export default function App() {
   } else {
     setCurrentPage('login');
   }
-  setIsAuthChecked(true); // authentication check completed
+  setIsAuthChecked(true); 
 }, []);
 
   const handleLogin = (role: 'student' | 'teacher') => {

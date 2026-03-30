@@ -137,7 +137,6 @@ export default function StudentNotifications() {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-6"
       >
-        {/* Header */}
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
@@ -167,7 +166,6 @@ export default function StudentNotifications() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Notifications List */}
           <div className="lg:col-span-2 space-y-4">
             <Card className="glass-card border-0">
               <CardHeader>
@@ -276,7 +274,6 @@ export default function StudentNotifications() {
             </Card>
           </div>
 
-          {/* Notification Settings */}
           <div className="space-y-6">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -327,7 +324,6 @@ export default function StudentNotifications() {
               </Card>
             </motion.div>
 
-            {/* Quick Stats */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}

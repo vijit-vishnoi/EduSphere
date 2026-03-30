@@ -18,7 +18,6 @@ const submitAssignment = async (req, res) => {
     });
     const io = req.app.get("io");
 
-    // after submission is created
     io.to(`user_${assignment.teacherId}`).emit("notification", {
       type: "NEW_SUBMISSION",
       message: "New assignment submission received",
@@ -82,7 +81,6 @@ const gradeSubmission = async (req, res) => {
       feedback,
     });
     const io = req.app.get("io");
-    // submission.studentId exists
     io.to(`user_${submission.studentId}`).emit("notification", {
       type: "GRADED",
       message: "Your assignment has been graded",

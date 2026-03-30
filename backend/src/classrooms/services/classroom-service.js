@@ -1,4 +1,3 @@
-// src/services/classroom-service.js
 const { User } = require('../../models');
 const nanoid = async () => (await import('nanoid')).nanoid;
 const ClassroomRepository = require('../repository/classroom-repository');

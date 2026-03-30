@@ -100,13 +100,11 @@ export default function StudentOverview() {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-8"
       >
-        {/* Header */}
         <div className="space-y-2">
           <h1 className="text-3xl text-edu-blue">Welcome back, {userName}!</h1>
           <p className="text-[var(--edu-text-secondary)]">Here's your learning progress overview</p>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <motion.div
@@ -133,7 +131,6 @@ export default function StudentOverview() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Upcoming Assignments */}
           <div className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -193,9 +190,7 @@ export default function StudentOverview() {
             </motion.div>
           </div>
 
-          {/* Right Column */}
           <div className="space-y-6">
-            {/* Recent Comments */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -234,7 +229,6 @@ export default function StudentOverview() {
               </Card>
             </motion.div>
 
-            {/* Quick Actions */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -263,7 +257,6 @@ export default function StudentOverview() {
           </div>
         </div>
 
-        {/* Progress Overview */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

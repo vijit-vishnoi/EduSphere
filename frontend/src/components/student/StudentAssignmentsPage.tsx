@@ -31,17 +31,15 @@ export default function StudentAssignmentPage({
   useEffect(() => {
   const load = async () => {
     try {
-      // 1️⃣ ALWAYS load assignment (never fails)
       const a = await getAssignmentById(assignmentId);
       setAssignment(a.data.assignment);
 
-      // 2️⃣ Try loading submission (may not exist)
       try {
         const sub = await getMySubmissions(assignmentId);
         setSubmission(sub.data.submission);
       } catch (err: any) {
         if (err.response?.status === 404) {
-          setSubmission(null); // not submitted yet → OK
+          setSubmission(null); 
         } else {
           throw err;
         }
@@ -94,13 +92,11 @@ export default function StudentAssignmentPage({
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
 
-      {/* BACK */}
       <Button variant="ghost" onClick={onBack}>
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back
       </Button>
 
-      {/* HEADER */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <Card className="glass-card border-0">
           <CardHeader>
@@ -134,7 +130,6 @@ export default function StudentAssignmentPage({
         </Card>
       </motion.div>
 
-      {/* SUBMISSION */}
       <Card className="glass-card border-0">
         <CardHeader>
           <CardTitle>Submit Assignment</CardTitle>
@@ -185,7 +180,6 @@ export default function StudentAssignmentPage({
         </CardContent>
       </Card>
 
-      {/* GRADE */}
       {submission?.grade !== undefined && (
         <Card className="glass-card border-0">
           <CardHeader>

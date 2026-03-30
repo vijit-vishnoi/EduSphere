@@ -19,18 +19,17 @@ export default function LoginPage({ onLogin, onNavigateToSignup, onNavigateToFor
   const [password, setPassword] = useState('');
   const [role, setRole] = useState<'student' | 'teacher'>('student');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(''); // New state for error messages
+  const [error, setError] = useState(''); 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(''); // Reset error
+    setError(''); 
     try {
       const res = await login(email, password);
       const user = res.data.user;
       const token = res.data.token;
       const userRole: 'student' | 'teacher' = user.role;
 
-      // Save user and token for session persistence
       localStorage.setItem('user', JSON.stringify(user));
        localStorage.setItem('token', token);
 

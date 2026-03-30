@@ -31,12 +31,12 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       description: {
-        type: DataTypes.TEXT,       // ✅ ADD THIS
+        type: DataTypes.TEXT,      
         allowNull: true,
       },
 
       allowJoinWithCode: {
-        type: DataTypes.BOOLEAN,    // ✅ ADD THIS
+        type: DataTypes.BOOLEAN,  
         defaultValue: true,
       },
 

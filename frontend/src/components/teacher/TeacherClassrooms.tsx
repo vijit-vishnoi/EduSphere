@@ -66,7 +66,6 @@ const EmptyState = () => (
   const user = storedUser ? JSON.parse(storedUser) : null;
   const userName = user ? `${user.name}` : 'Teacher';
   
-  // copy classroom code helper
   const handleCopy = async (code: string) => {
   try {
     await navigator.clipboard.writeText(code);
@@ -77,7 +76,6 @@ const EmptyState = () => (
 };
 
 
-  // placeholder open handler — replace with router push / navigation
   const handleOpen = (classroomId: string) => {
   setSelectedClassroom(classroomId);
   onTabChange("classroom-details");
@@ -96,7 +94,7 @@ const EmptyState = () => (
         totalClassrooms: list.length,
         totalStudents: list.reduce((sum: number, cls: any) => sum + (cls.studentCount || 0), 0),
         assignmentsCreated: list.reduce((sum: number, cls: any) => sum + (cls.assignmentsCount || 0), 0),
-        pendingSubmissions: 0 // placeholder until assignments API added
+        pendingSubmissions: 0 
       });
       } catch (err) {
         console.error("Error fetching classrooms:", err);
@@ -111,7 +109,6 @@ const EmptyState = () => (
   return (
     <div className="p-6 h-full overflow-y-auto bg-[var(--edu-bg-primary)]">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-        {/* Header */}
         <div className="flex justify-between items-center">
           <div className="space-y-2">
             <h1 className="text-3xl text-edu-blue">Your Classrooms</h1>
@@ -127,7 +124,6 @@ const EmptyState = () => (
           </Button>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {statList.map((stat, index) => (
             <motion.div
@@ -153,7 +149,6 @@ const EmptyState = () => (
         </div>
 
 
-        {/* Classroom List */}
         {classrooms.length === 0 ? (
           <Card className="glass-card border-0">
             <CardContent className="text-center py-12">
@@ -183,24 +178,20 @@ const EmptyState = () => (
                         className="cursor-pointer p-6 glass border border-[var(--edu-border)]
                         rounded-2xl hover:glow-blue hover:border-edu-blue transition-all group"
                       >
-                        {/* Subject icon */}
                         <div className="flex items-center gap-3 mb-4">
                           <Icon className={`w-6 h-6 ${colorClass}`} />
                           <span className={`text-sm ${colorClass}`}>{cls.subject}</span>
                         </div>
 
-                        {/* Title */}
                         <h3 className="text-xl font-semibold text-[var(--edu-text-primary)]
                         group-hover:text-edu-blue transition-colors">
                           {cls.name}
                         </h3>
 
-                        {/* Students count */}
                         <p className="text-sm text-[var(--edu-text-secondary)] mt-1">
                           {cls.studentCount || 0} Students
                         </p>
 
-                        {/* Code + Copy */}
                         <div className="mt-4 flex items-center justify-between">
                           <div className="flex items-center gap-2 text-sm font-mono text-edu-blue">
                             Code: {cls.code}
@@ -218,7 +209,6 @@ const EmptyState = () => (
                           </button>
                         </div>
 
-                        {/* Date */}
                         <p className="mt-3 text-xs text-[var(--edu-text-secondary)]">
                           Created on: {cls.createdAt}
                         </p>

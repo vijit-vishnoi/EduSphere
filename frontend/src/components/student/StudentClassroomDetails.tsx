@@ -58,7 +58,6 @@ export default function StudentClassroomDetails({classroomId,
   return (
     <div className="p-6 h-full overflow-y-auto space-y-8">
 
-      {/* ---------- CLASS HEADER ---------- */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -89,7 +88,6 @@ export default function StudentClassroomDetails({classroomId,
         </div>
       </motion.div>
 
-      {/* ---------- TABS (FIXED SPACING) ---------- */}
       <div className="flex items-center border-b border-white/10 pb-3 gap-10 pl-1 tab-fix">
 
         {[
@@ -117,7 +115,6 @@ export default function StudentClassroomDetails({classroomId,
         ))}
       </div>
 
-      {/* ---------- TAB CONTENT ---------- */}
       <motion.div
         key={tab}
         initial={{ opacity: 0, y: 14 }}
@@ -125,11 +122,9 @@ export default function StudentClassroomDetails({classroomId,
         className="space-y-8"
       >
 
-        {/* ===== Overview ===== */}
         {tab === "overview" && (
           <div className="space-y-8">
 
-            {/* Description */}
             <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
               <h2 className="text-xl font-semibold text-white flex items-center gap-2">
                 <NotebookText className="w-5 h-5 text-edu-purple" />
@@ -146,7 +141,6 @@ export default function StudentClassroomDetails({classroomId,
               </div>
             </div>
 
-            {/* Recent Assignments */}
             <div className="glass-card p-6 rounded-xl border border-white/10">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <ClipboardList className="w-5 h-5 text-edu-green" />
@@ -191,7 +185,6 @@ export default function StudentClassroomDetails({classroomId,
           </div>
         )}
 
-        {/* ===== Assignments ===== */}
         {tab === "assignments" && (
           <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
             <h2 className="text-xl text-white font-semibold mb-3 flex items-center gap-2">
@@ -228,7 +221,6 @@ export default function StudentClassroomDetails({classroomId,
           </div>
         )}
 
-        {/* ===== Students ===== */}
         {tab === "students" && (
           <div className="glass-card p-6 rounded-xl border border-white/10 space-y-4">
             <h2 className="text-xl text-white font-semibold mb-4 flex items-center gap-2">

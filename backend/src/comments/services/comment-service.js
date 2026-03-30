@@ -31,4 +31,4 @@ async getCommentsForAssignment(assignmentId, limit, offset) {
   }
 }
 
-module.exports = new CommentService(); // 👈 Important: export instance
+module.exports = new CommentService(); 

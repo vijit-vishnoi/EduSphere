@@ -78,7 +78,6 @@ export default function StudentClassrooms({
         className="space-y-8"
       >
         
-        {/* Header */}
         <div className="flex justify-between items-center">
           <div className="space-y-2">
             <h1 className="text-3xl text-edu-blue">Your Classrooms</h1>
@@ -93,7 +92,6 @@ export default function StudentClassrooms({
           </Button>
         </div>
 
-        {/* Classroom List */}
         {classrooms.length === 0 ? (
           <Card className="glass-card border-0">
             <CardContent className="text-center py-12">
@@ -127,10 +125,8 @@ export default function StudentClassrooms({
     transition-all duration-300 group
   "
 >
-  {/* TOP ROW */}
   <div className="flex justify-between items-center mb-6">
 
-    {/* Left: Icon + Title */}
     <div className="flex items-center gap-4">
       <div className="w-14 h-14 rounded-xl bg-edu-blue/20 flex items-center justify-center">
         <BookOpen className="w-7 h-7 text-edu-blue" />
@@ -143,7 +139,6 @@ export default function StudentClassrooms({
       </div>
     </div>
 
-    {/* Right: Code */}
     <div className="flex items-center gap-2">
       <Copy className="w-4 h-4 text-edu-blue" />
       <p className="text-sm font-mono text-[var(--edu-text-secondary)]">
@@ -152,10 +147,8 @@ export default function StudentClassrooms({
     </div>
   </div>
 
-  {/* BOTTOM ROW */}
   <div className="flex justify-between items-center">
 
-    {/* Teacher */}
     <div className="flex items-center gap-2">
       <Users className="w-4 h-4 text-edu-green" />
       <p className="text-sm text-[var(--edu-text-secondary)]">
@@ -163,7 +156,6 @@ export default function StudentClassrooms({
       </p>
     </div>
 
-    {/* Student Count */}
     <div className="flex items-center gap-2">
       <Users className="w-4 h-4 text-edu-purple" />
       <p className="text-sm text-[var(--edu-text-secondary)]">

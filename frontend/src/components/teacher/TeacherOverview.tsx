@@ -296,7 +296,6 @@ export default function TeacherOverview() {
               </Card>
             </motion.div>
 
-            {/* Quick Actions */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -328,7 +327,6 @@ export default function TeacherOverview() {
           </div>
         </div>
 
-        {/* Subject Performance */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -378,7 +376,6 @@ export default function TeacherOverview() {
           </Card>
         </motion.div>
 
-        {/* Teaching Insights */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

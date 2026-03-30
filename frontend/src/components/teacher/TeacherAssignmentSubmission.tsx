@@ -95,13 +95,11 @@ export default function TeacherAssignmentSubmissions({
   return (
     <div className="p-6 h-full overflow-y-auto space-y-6 max-w-5xl mx-auto">
 
-      {/* BACK */}
       <Button variant="ghost" onClick={onBack}>
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back to Assignment
       </Button>
 
-      {/* HEADER */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -114,7 +112,6 @@ export default function TeacherAssignmentSubmissions({
         </p>
       </motion.div>
 
-      {/* EMPTY STATE */}
       {submissions.length === 0 && (
         <Card className="glass-card border-0">
           <CardContent className="py-12 text-center text-gray-400">
@@ -123,7 +120,6 @@ export default function TeacherAssignmentSubmissions({
         </Card>
       )}
 
-      {/* SUBMISSIONS */}
       <div className="space-y-6">
         {submissions.map((s) =>{
         const isGraded =
@@ -154,7 +150,6 @@ export default function TeacherAssignmentSubmissions({
 
               <CardContent className="space-y-4">
 
-                {/* TEXT SUBMISSION */}
                 {s.content && (
                   <div>
                     <p className="text-sm text-gray-400 mb-1">
@@ -166,7 +161,6 @@ export default function TeacherAssignmentSubmissions({
                   </div>
                 )}
 
-                {/* FILE SUBMISSION */}
                 {s.fileUrl && (
                   <a
                     href={`http://localhost:5000${s.fileUrl}`}
@@ -179,7 +173,6 @@ export default function TeacherAssignmentSubmissions({
                   </a>
                 )}
 
-                {/* GRADING */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Input
                     placeholder="Grade (e.g. 8/10 or A+)"
@@ -214,7 +207,7 @@ export default function TeacherAssignmentSubmissions({
 
                 {savedIds.includes(s.id) && (
                     <p className="text-sm text-edu-green mt-2">
-                        ✓ Grade saved successfully
+                         Grade saved successfully
                     </p>
                     )}
               </CardContent>
