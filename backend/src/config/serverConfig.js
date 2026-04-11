@@ -1,6 +1,6 @@
 require('dotenv').config();
 
 module.exports = {
-  PORT: process.env.PORT || 3000,
+  PORT: process.env.PORT || 5000,
   JWT_SECRET: process.env.JWT_SECRET || 'default_secret',
 };
